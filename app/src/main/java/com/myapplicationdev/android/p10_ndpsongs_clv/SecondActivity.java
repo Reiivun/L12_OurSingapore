@@ -16,7 +16,8 @@ public class SecondActivity extends AppCompatActivity {
 
 	ListView lv;
     ArrayList<Song> songList;
-	ArrayAdapter adapter;
+	//ArrayAdapter adapter;
+    CustomAdapter adapter;
 	String moduleCode;
 	int requestCode = 9;
     Button btn5Stars;
@@ -35,7 +36,7 @@ public class SecondActivity extends AppCompatActivity {
         songList = dbh.getAllSongs();
         dbh.close();
 
-		adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, songList);
+        adapter = new CustomAdapter(this, R.layout.row, songList);
 		lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

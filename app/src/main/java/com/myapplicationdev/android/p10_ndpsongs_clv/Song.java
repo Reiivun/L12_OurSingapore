@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class Song implements Serializable {
 
-	private int id;
-	private String title;
-	private String singers;
-	private int yearReleased;
-	private int stars;
+    private int id;
+    private String title;
+    private String singers;
+    private int yearReleased;
+    private int stars;
 
     public Song(String title, String singers, int yearReleased, int stars) {
         this.title = title;
@@ -73,17 +73,41 @@ public class Song implements Serializable {
     @Override
     public String toString() {
         String starsString = "";
-        if (stars == 5){
+        if (stars == 5) {
             starsString = "*****";
-        } else if (stars == 4){
+        } else if (stars == 4) {
             starsString = "****";
         }
 
         //or
-        for(int i = 0; i < stars; i++){
+        for (int i = 0; i < stars; i++) {
             starsString += "*";
         }
         return title + "\n" + singers + " - " + yearReleased + "\n" + starsString;
+
+    }
+
+    public String starString() {
+        switch (stars) {
+            case 1:
+                return "*";
+
+            case 2:
+                return "* *";
+
+            case 3:
+                return "* * *";
+
+            case 4:
+                return "* * * *";
+
+            case 5:
+                return "* * * * *";
+
+            default:
+                return "(error - stars unable to be displayed)";
+        }
+
 
     }
 }
