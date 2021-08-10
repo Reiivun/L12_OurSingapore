@@ -37,7 +37,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/etSingers"
+        android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter island description here" />
@@ -50,7 +50,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/etYear"
+        android:id="@+id/etSquare"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter square km here" />

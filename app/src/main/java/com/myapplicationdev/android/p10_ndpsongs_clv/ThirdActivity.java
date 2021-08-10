@@ -91,8 +91,6 @@ public class ThirdActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         myBuilder.setNeutralButton("Cancel", null);
-                        AlertDialog myDialog = myBuilder.create();
-                        myDialog.show();
 
                         DBHelper dbh = new DBHelper(ThirdActivity.this);
                         int result = dbh.deleteSong(currentSong.getId());
@@ -106,6 +104,14 @@ public class ThirdActivity extends AppCompatActivity {
                         }
                     }
                 });
+                myBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                AlertDialog myDialog = myBuilder.create();
+                myDialog.show();
 
             }
         });
@@ -132,7 +138,8 @@ public class ThirdActivity extends AppCompatActivity {
 
                     }
                 });
-
+                AlertDialog myDialog = myBuilder.create();
+                myDialog.show();
 
             }
         });

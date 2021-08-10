@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/tvName"
@@ -38,7 +39,6 @@
             android:numStars="5"
             android:rating="2"
             android:stepSize="1"
-            android:descendantFocusability="blocksDescendants"
             android:layout_weight="3"/>
 
 
