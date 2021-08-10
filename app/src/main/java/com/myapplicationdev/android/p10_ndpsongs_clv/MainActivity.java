@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
 
     EditText etName, etDescription, etSquare;
     Button btnInsert, btnShowList;
-    RadioGroup rg;
     RatingBar ratingBar;
 
     @Override
@@ -30,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         etSquare = findViewById(R.id.etSquare);
         btnInsert = findViewById(R.id.btnInsertSong);
         btnShowList = findViewById(R.id.btnShowList);
-        rg = findViewById(R.id.rgStars);
         ratingBar = findViewById(R.id.ratingStars);
 
         btnInsert.setOnClickListener(new View.OnClickListener() {
@@ -72,29 +70,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-
-    private int getStars() {
-        int stars = 1;
-        switch (rg.getCheckedRadioButtonId()) {
-            case R.id.radio1:
-                stars = 1;
-                break;
-            case R.id.radio2:
-                stars = 2;
-                break;
-            case R.id.radio3:
-                stars = 3;
-                break;
-            case R.id.radio4:
-                stars = 4;
-                break;
-            case R.id.radio5:
-                stars = 5;
-                break;
-        }
-        return stars;
     }
 
 }

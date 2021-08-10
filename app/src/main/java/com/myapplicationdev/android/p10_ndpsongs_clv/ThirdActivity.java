@@ -1,5 +1,6 @@
 package com.myapplicationdev.android.p10_ndpsongs_clv;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,8 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ThirdActivity extends AppCompatActivity {
@@ -16,7 +19,7 @@ public class ThirdActivity extends AppCompatActivity {
     EditText etName, etDescription, etSquare, etID;
     RadioButton rb1, rb2, rb3, rb4, rb5;
     Button btnCancel, btnUpdate, btnDelete;
-    RadioGroup rg;
+    RatingBar ratingBar;
 
 
     @Override
@@ -26,12 +29,6 @@ public class ThirdActivity extends AppCompatActivity {
 
         setTitle(getTitle().toString() + " ~ " + getResources().getText(R.string.title_activity_third));
 
-        rb1 = (RadioButton) findViewById(R.id.radio1);
-        rb2 = (RadioButton) findViewById(R.id.radio2);
-        rb3 = (RadioButton) findViewById(R.id.radio3);
-        rb4 = (RadioButton) findViewById(R.id.radio4);
-        rb5 = (RadioButton) findViewById(R.id.radio5);
-        rg = (RadioGroup) findViewById(R.id.rgStars);
         btnCancel = (Button) findViewById(R.id.btnCancel);
         btnDelete = (Button) findViewById(R.id.btnDelete);
         btnUpdate = (Button) findViewById(R.id.btnUpdate);
@@ -39,6 +36,7 @@ public class ThirdActivity extends AppCompatActivity {
         etDescription = (EditText) findViewById(R.id.etDescription);
         etSquare = (EditText) findViewById(R.id.etSquare);
         etID = (EditText) findViewById(R.id.etID);
+        ratingBar = (RatingBar) findViewById(R.id.ratingStars1);
 
         Intent i = getIntent();
         final Song currentSong = (Song) i.getSerializableExtra("song");
@@ -47,17 +45,8 @@ public class ThirdActivity extends AppCompatActivity {
         etName.setText(currentSong.getId()+"");
         etDescription.setText(currentSong.getDescription());
         etSquare.setText(currentSong.getSquare()+"");
-        switch (currentSong.getStars()){
-            case 5: rb5.setChecked(true);
-                    break;
-            case 4: rb4.setChecked(true);
-                    break;
-            case 3: rb3.setChecked(true);
-                    break;
-            case 2: rb2.setChecked(true);
-                    break;
-            case 1: rb1.setChecked(true);
-        }
+        //int stars = (int) ratingBar.getRating();
+        currentSong.setStars((int) ratingBar.getRating());
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,9 +63,7 @@ public class ThirdActivity extends AppCompatActivity {
                 }
                 currentSong.setSquare(square);
 
-                int selectedRB = rg.getCheckedRadioButtonId();
-                RadioButton rb = (RadioButton) findViewById(selectedRB);
-                currentSong.setStars(Integer.parseInt(rb.getText().toString()));
+                ratingBar.setRating(currentSong.getStars());
                 int result = dbh.updateSong(currentSong);
                 if (result>0){
                     Toast.makeText(ThirdActivity.this, "Island updated", Toast.LENGTH_SHORT).show();
@@ -93,23 +80,60 @@ public class ThirdActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBHelper dbh = new DBHelper(ThirdActivity.this);
-                int result = dbh.deleteSong(currentSong.getId());
-                if (result>0){
-                    Toast.makeText(ThirdActivity.this, "Island deleted", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent();
-                    setResult(RESULT_OK);
-                    finish();
-                } else {
-                    Toast.makeText(ThirdActivity.this, "Delete failed", Toast.LENGTH_SHORT).show();
-                }
+
+                AlertDialog.Builder myBuilder = new AlertDialog.Builder(ThirdActivity.this);
+
+                myBuilder.setTitle("Danger");
+                myBuilder.setMessage("Are you sure you want to delete the island, " + currentSong.getName() + "?");
+                myBuilder.setCancelable(false);
+
+                myBuilder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        myBuilder.setNeutralButton("Cancel", null);
+                        AlertDialog myDialog = myBuilder.create();
+                        myDialog.show();
+
+                        DBHelper dbh = new DBHelper(ThirdActivity.this);
+                        int result = dbh.deleteSong(currentSong.getId());
+                        if (result>0){
+                            Toast.makeText(ThirdActivity.this, "Island deleted", Toast.LENGTH_SHORT).show();
+                            Intent y = new Intent();
+                            setResult(RESULT_OK);
+                            finish();
+                        } else {
+                            Toast.makeText(ThirdActivity.this, "Delete failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
             }
         });
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                AlertDialog.Builder myBuilder = new AlertDialog.Builder(ThirdActivity.this);
+
+                myBuilder.setTitle("Danger");
+                myBuilder.setMessage("Do you want to discard the changes?");
+                myBuilder.setCancelable(false);
+
+                myBuilder.setNegativeButton("Discard", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                });
+
+                myBuilder.setPositiveButton("Do not discard", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+
             }
         });
 
