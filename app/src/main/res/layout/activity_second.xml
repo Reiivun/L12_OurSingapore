@@ -9,7 +9,7 @@
         android:id="@+id/btnShow5Stars"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn5Stars"  />
+        android:text="Show all islands with 5 stars"  />
 
     <ListView
         android:id="@+id/lv"

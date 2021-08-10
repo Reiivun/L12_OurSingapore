@@ -5,23 +5,23 @@ import java.io.Serializable;
 public class Song implements Serializable {
 
     private int id;
-    private String title;
-    private String singers;
-    private int yearReleased;
+    private String name;
+    private String description;
+    private int square;
     private int stars;
 
-    public Song(String title, String singers, int yearReleased, int stars) {
-        this.title = title;
-        this.singers = singers;
-        this.yearReleased = yearReleased;
+    public Song(String name, String description, int square, int stars) {
+        this.name = name;
+        this.description = description;
+        this.square = square;
         this.stars = stars;
     }
 
-    public Song(int id, String title, String singers, int yearReleased, int stars) {
+    public Song(int id, String name, String description, int square, int stars) {
         this.id = id;
-        this.title = title;
-        this.singers = singers;
-        this.yearReleased = yearReleased;
+        this.name = name;
+        this.description = description;
+        this.square = square;
         this.stars = stars;
     }
 
@@ -34,30 +34,30 @@ public class Song implements Serializable {
         return this;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public Song setTitle(String title) {
-        this.title = title;
+    public Song setName(String name) {
+        this.name = name;
         return this;
     }
 
-    public String getSingers() {
-        return singers;
+    public String getDescription() {
+        return description;
     }
 
-    public Song setSingers(String singers) {
-        this.singers = singers;
+    public Song setDescription(String description) {
+        this.description = description;
         return this;
     }
 
-    public int getYearReleased() {
-        return yearReleased;
+    public int getSquare() {
+        return square;
     }
 
-    public Song setYearReleased(int yearReleased) {
-        this.yearReleased = yearReleased;
+    public Song setSquare(int square) {
+        this.square = square;
         return this;
     }
 
@@ -83,7 +83,7 @@ public class Song implements Serializable {
         for (int i = 0; i < stars; i++) {
             starsString += "*";
         }
-        return title + "\n" + singers + " - " + yearReleased + "\n" + starsString;
+        return name + "\n" + description + " - " + square + "\n" + starsString;
 
     }
 

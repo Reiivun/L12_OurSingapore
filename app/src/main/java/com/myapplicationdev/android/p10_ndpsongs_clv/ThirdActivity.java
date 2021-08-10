@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ThirdActivity extends AppCompatActivity {
 
-    EditText etID, etTitle, etSingers, etYear;
+    EditText etName, etDescription, etSquare, etID;
     RadioButton rb1, rb2, rb3, rb4, rb5;
     Button btnCancel, btnUpdate, btnDelete;
     RadioGroup rg;
@@ -35,18 +35,18 @@ public class ThirdActivity extends AppCompatActivity {
         btnCancel = (Button) findViewById(R.id.btnCancel);
         btnDelete = (Button) findViewById(R.id.btnDelete);
         btnUpdate = (Button) findViewById(R.id.btnUpdate);
+        etName = (EditText) findViewById(R.id.etName);
+        etDescription = (EditText) findViewById(R.id.etDescription);
+        etSquare = (EditText) findViewById(R.id.etSquare);
         etID = (EditText) findViewById(R.id.etID);
-        etTitle = (EditText) findViewById(R.id.etTitle);
-        etSingers = (EditText) findViewById(R.id.etSingers);
-        etYear = (EditText) findViewById(R.id.etYear);
 
         Intent i = getIntent();
         final Song currentSong = (Song) i.getSerializableExtra("song");
 
         etID.setText(currentSong.getId()+"");
-        etTitle.setText(currentSong.getTitle());
-        etSingers.setText(currentSong.getSingers());
-        etYear.setText(currentSong.getYearReleased()+"");
+        etName.setText(currentSong.getId()+"");
+        etDescription.setText(currentSong.getDescription());
+        etSquare.setText(currentSong.getSquare()+"");
         switch (currentSong.getStars()){
             case 5: rb5.setChecked(true);
                     break;
@@ -63,28 +63,28 @@ public class ThirdActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DBHelper dbh = new DBHelper(ThirdActivity.this);
-                currentSong.setTitle(etTitle.getText().toString().trim());
-                currentSong.setSingers(etSingers.getText().toString().trim());
-                int year = 0;
+                currentSong.setName(etName.getText().toString().trim());
+                currentSong.setDescription(etDescription.getText().toString().trim());
+                int square = 0;
                 try {
-                    year = Integer.valueOf(etYear.getText().toString().trim());
+                    square = Integer.valueOf(etSquare.getText().toString().trim());
                 } catch (Exception e){
-                    Toast.makeText(ThirdActivity.this, "Invalid year", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ThirdActivity.this, "Invalid square km", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                currentSong.setYearReleased(year);
+                currentSong.setSquare(square);
 
                 int selectedRB = rg.getCheckedRadioButtonId();
                 RadioButton rb = (RadioButton) findViewById(selectedRB);
                 currentSong.setStars(Integer.parseInt(rb.getText().toString()));
                 int result = dbh.updateSong(currentSong);
                 if (result>0){
-                    Toast.makeText(ThirdActivity.this, "Song updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ThirdActivity.this, "Island updated", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent();
                     setResult(RESULT_OK);
                     finish();
                 } else {
-                    Toast.makeText(ThirdActivity.this, "Update failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ThirdActivity.this, "Island failed", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -96,7 +96,7 @@ public class ThirdActivity extends AppCompatActivity {
                 DBHelper dbh = new DBHelper(ThirdActivity.this);
                 int result = dbh.deleteSong(currentSong.getId());
                 if (result>0){
-                    Toast.makeText(ThirdActivity.this, "Song deleted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ThirdActivity.this, "Island deleted", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent();
                     setResult(RESULT_OK);
                     finish();

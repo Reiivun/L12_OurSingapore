@@ -21,39 +21,39 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title"
+        android:text="Name of Island"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/etTitle"
+        android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/hint_title" />
+        android:hint="Enter Island Name" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/singers"
+        android:text="Description"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/etSingers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/hint_singers" />
+        android:hint="Enter island description here" />
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/year"
+        android:text="Square km"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/etYear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/hint_year" />
+        android:hint="Enter square km here" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

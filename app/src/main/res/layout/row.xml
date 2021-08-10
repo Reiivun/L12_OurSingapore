@@ -6,10 +6,10 @@
     android:layout_margin="10dp">
 
     <TextView
-        android:id="@+id/tvTitle"
+        android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="Name"
         android:textColor="#0000cd"
         android:textSize="20dp"/>
 
@@ -20,10 +20,10 @@
         android:layout_margin="5dp">
 
         <TextView
-            android:id="@+id/tvYear"
+            android:id="@+id/tvSquare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Year"
+            android:text="Square"
             android:textSize="13dp"/>
 
         <TextView
@@ -42,10 +42,10 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvSingers"
+        android:id="@+id/tvDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Singers"
+        android:text="Description"
         android:textColor="#40e0d0"/>
 
 </LinearLayout>

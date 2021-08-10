@@ -15,9 +15,9 @@ public class DBHelper extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 	private static final String TABLE_SONG = "Song";
 	private static final String COLUMN_ID = "_id";
-	private static final String COLUMN_TITLE = "title";
-	private static final String COLUMN_SINGERS = "singers";
-	private static final String COLUMN_YEAR = "year";
+	private static final String COLUMN_NAME = "name";
+	private static final String COLUMN_DESCRIPTION = "description";
+	private static final String COLUMN_SQUARE = "square";
 	private static final String COLUMN_STARS = "stars";
 
 	public DBHelper(Context context) {
@@ -31,9 +31,9 @@ public class DBHelper extends SQLiteOpenHelper {
 		// singers TEXT, stars INTEGER, year INTEGER );
 		String createSongTableSql = "CREATE TABLE " + TABLE_SONG + "("
 				+ COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-				+ COLUMN_TITLE + " TEXT, "
-				+ COLUMN_SINGERS + " TEXT, "
-				+ COLUMN_YEAR + " INTEGER, "
+				+ COLUMN_NAME + " TEXT, "
+				+ COLUMN_DESCRIPTION + " TEXT, "
+				+ COLUMN_SQUARE + " INTEGER, "
                 + COLUMN_STARS + " INTEGER )";
 		db.execSQL(createSongTableSql);
 		Log.i("info", createSongTableSql + "\ncreated tables");
@@ -45,13 +45,13 @@ public class DBHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	public long insertSong(String title, String singers, int year, int stars) {
+	public long insertSong(String name, String description, int square, int stars) {
 		// Get an instance of the database for writing
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put(COLUMN_TITLE, title);
-		values.put(COLUMN_SINGERS, singers);
-        values.put(COLUMN_YEAR, year);
+		values.put(COLUMN_NAME, name);
+		values.put(COLUMN_DESCRIPTION, description);
+        values.put(COLUMN_SQUARE, square);
 		values.put(COLUMN_STARS, stars);
 		// Insert the row into the TABLE_SONG
 		long result = db.insert(TABLE_SONG, null, values);
@@ -64,8 +64,8 @@ public class DBHelper extends SQLiteOpenHelper {
 	public ArrayList<Song> getAllSongs() {
 		ArrayList<Song> songslist = new ArrayList<Song>();
 		String selectQuery = "SELECT " + COLUMN_ID + ","
-				+ COLUMN_TITLE + "," + COLUMN_SINGERS + ","
-				+ COLUMN_YEAR + ","
+				+ COLUMN_NAME + "," + COLUMN_DESCRIPTION + ","
+				+ COLUMN_SQUARE + ","
 				+ COLUMN_STARS + " FROM " + TABLE_SONG;
 
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -91,7 +91,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		ArrayList<Song> songslist = new ArrayList<Song>();
 
 		SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns= {COLUMN_ID, COLUMN_TITLE, COLUMN_SINGERS, COLUMN_YEAR, COLUMN_STARS};
+        String[] columns= {COLUMN_ID, COLUMN_NAME, COLUMN_DESCRIPTION, COLUMN_SQUARE, COLUMN_STARS};
         String condition = COLUMN_STARS + ">= ?";
         String[] args = {String.valueOf(starsFilter)};
 
@@ -127,9 +127,9 @@ public class DBHelper extends SQLiteOpenHelper {
 	public int updateSong(Song data){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_TITLE, data.getTitle());
-        values.put(COLUMN_SINGERS, data.getSingers());
-        values.put(COLUMN_YEAR, data.getYearReleased());
+        values.put(COLUMN_NAME, data.getName());
+        values.put(COLUMN_DESCRIPTION, data.getDescription());
+        values.put(COLUMN_SQUARE, data.getSquare());
         values.put(COLUMN_STARS, data.getStars());
         String condition = COLUMN_ID + "= ?";
         String[] args = {String.valueOf(data.getId())};

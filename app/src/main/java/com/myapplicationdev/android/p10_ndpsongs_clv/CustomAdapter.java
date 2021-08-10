@@ -33,19 +33,19 @@ public class CustomAdapter extends ArrayAdapter {
         View rowView = inflater.inflate(layout_id, parent, false);
 
         // Obtain the UI components and do the necessary binding
-        TextView tvTitle = rowView.findViewById(R.id.tvTitle);
-        TextView tvYear = rowView.findViewById(R.id.tvYear);
+        TextView tvName = rowView.findViewById(R.id.tvName);
+        TextView tvSquare = rowView.findViewById(R.id.tvSquare);
         TextView tvStars = rowView.findViewById(R.id.tvStars);
-        TextView tvSingers = rowView.findViewById(R.id.tvSingers);
+        TextView tvDescription = rowView.findViewById(R.id.tvDescription);
 
         // Obtain the Android Version information based on the position
         Song currentVersion = songList.get(position);
 
         // Set values to the TextView to display the corresponding information
-        tvTitle.setText(currentVersion.getTitle());
-        tvYear.setText("" + currentVersion.getYearReleased());
+        tvName.setText(currentVersion.getName());
+        tvSquare.setText("" + currentVersion.getSquare());
         tvStars.setText("" + currentVersion.starString());
-        tvSingers.setText(currentVersion.getSingers());
+        tvDescription.setText(currentVersion.getDescription());
 
         return rowView;
     }

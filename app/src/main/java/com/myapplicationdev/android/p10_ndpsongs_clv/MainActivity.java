@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText etTitle, etSingers, etYear;
+    EditText etName, etDescription, etSquare;
     Button btnInsert, btnShowList;
     RadioGroup rg;
 
@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle(getTitle().toString() + " ~ " + getResources().getText(R.string.title_activity_main));
 
-        etTitle = findViewById(R.id.etTitle);
-        etSingers = findViewById(R.id.etSingers);
-        etYear = findViewById(R.id.etYear);
+        etName = findViewById(R.id.etName);
+        etDescription = findViewById(R.id.etDescription);
+        etSquare = findViewById(R.id.etSquare);
         btnInsert = findViewById(R.id.btnInsertSong);
         btnShowList = findViewById(R.id.btnShowList);
         rg = findViewById(R.id.rgStars);
@@ -34,25 +34,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String title = etTitle.getText().toString().trim();
-                String singers = etSingers.getText().toString().trim();
-                if (title.length() == 0 || singers.length() == 0){
+                String name = etName.getText().toString().trim();
+                String description = etDescription.getText().toString().trim();
+                if (name.length() == 0 || description.length() == 0){
                     Toast.makeText(MainActivity.this, "Incomplete data", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                String year_str = etYear.getText().toString().trim();
-                int year = Integer.valueOf(year_str);
+                String square_str = etSquare.getText().toString().trim();
+                int square = Integer.valueOf(square_str);
                 int stars = getStars();
 
                 DBHelper dbh = new DBHelper(MainActivity.this);
-                long result = dbh.insertSong(title, singers, year, stars);
+                long result = dbh.insertSong(name, description, square, stars);
 
                 if (result != -1) {
                     Toast.makeText(MainActivity.this, "Song inserted", Toast.LENGTH_LONG).show();
-                    etTitle.setText("");
-                    etSingers.setText("");
-                    etYear.setText("");
+                    etName.setText("");
+                    etDescription.setText("");
+                    etSquare.setText("");
                 } else {
                     Toast.makeText(MainActivity.this, "Insert failed", Toast.LENGTH_LONG).show();
                 }
