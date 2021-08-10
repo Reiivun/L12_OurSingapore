@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     EditText etName, etDescription, etSquare;
     Button btnInsert, btnShowList;
     RadioGroup rg;
+    RatingBar ratingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         btnInsert = findViewById(R.id.btnInsertSong);
         btnShowList = findViewById(R.id.btnShowList);
         rg = findViewById(R.id.rgStars);
+        ratingBar = findViewById(R.id.ratingStars);
 
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String square_str = etSquare.getText().toString().trim();
                 int square = Integer.valueOf(square_str);
-                int stars = getStars();
+                int stars = (int) ratingBar.getRating();
 
                 DBHelper dbh = new DBHelper(MainActivity.this);
                 long result = dbh.insertSong(name, description, square, stars);

@@ -31,13 +31,16 @@
             android:layout_height="wrap_content"
             android:text="   " />
 
-        <TextView
-            android:id="@+id/tvStars"
-            android:layout_width="match_parent"
+        <RatingBar
+            android:id="@+id/ratingStars"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ff6347"
-            android:text="Stars"
-            android:textSize="20dp"/>
+            android:numStars="5"
+            android:rating="2"
+            android:stepSize="1"
+            android:descendantFocusability="blocksDescendants"
+            android:layout_weight="3"/>
+
 
     </LinearLayout>
 
